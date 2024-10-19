@@ -54,6 +54,7 @@ const comentarioRoutes: FastifyPluginAsync = async (
         reply.code(404).send({ message: "No se encontraron comentarios" });
         return;
       }
+      reply.code(200);
       const comentarios = res;
       return comentarios;
     },
@@ -73,6 +74,11 @@ const comentarioRoutes: FastifyPluginAsync = async (
       const comentarioEditado = request.body as ComentarioType;
       const { id_comentario , id_tema } = request.params as { id_comentario: number, id_tema: number };
       const res = await comentarioService.modify(id_tema, id_comentario, comentarioEditado.descripcion)
+      if (res.length === 0) {
+        reply.code(404).send({ message: "No se encontro un comentario con ese id" });
+        return;
+      }
+      reply.code(200);
       return res;
     },
   });
@@ -89,6 +95,7 @@ const comentarioRoutes: FastifyPluginAsync = async (
     handler: async function (request, reply) {
       const { id_comentario, id_tema } = request.params as { id_comentario: number, id_tema: number };
       const res = await comentarioService.erase(id_tema, id_comentario)
+      reply.code(200);
       return res;
     },
   });
