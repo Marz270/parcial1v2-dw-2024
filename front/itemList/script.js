@@ -51,16 +51,13 @@ function createTaskCard(theme) {
                 <p class="description">Duración: ${theme.descripcion}.</p>
                 <p class="description">Creador: ${theme.creador}</p>
                 <div class="actions">
-                    <button class="pref">
-                        Ver comentarios
-                    </button>
                     <button class="accept">
-                        Editar tarea
+                        Ver comentarios
                     </button>
                 </div>
         </div>
             `;
-  card.querySelector(".pref").addEventListener("click", () => {
+  card.querySelector(".accept").addEventListener("click", () => {
     window.location.href = `../viewItem/index.html?id=${theme.id_tema}&id_creador=${theme.id_usuario}`;
   });
 
