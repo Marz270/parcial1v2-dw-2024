@@ -23,7 +23,7 @@ const comentarioRoutes: FastifyPluginAsync = async (
         },
       },
     },
-    onRequest: [fastify.verifyJWT, fastify.verifySelfOrAdmin],
+    onRequest: [fastify.verifyJWT],
     handler: async function (request, reply) {
       const nuevoComentario = request.body as ComentarioPostType;
       const { id_usuario, id_tema } = request.params as {
@@ -68,7 +68,7 @@ const comentarioRoutes: FastifyPluginAsync = async (
         },
       },
     },
-    onRequest: [fastify.verifyJWT, fastify.verifySelfOrAdmin],
+    onRequest: [fastify.verifyJWT, fastify.verifyAdmin],
     handler: async function (request, reply) {
       const comentarioEditado = request.body as ComentarioType;
       const { id_comentario , id_tema } = request.params as { id_comentario: number, id_tema: number };
